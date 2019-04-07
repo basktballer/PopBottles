@@ -1,34 +1,29 @@
 function bottleCalculator(spend) {
-  var bottlesPurchased = Math.floor(spend / 2);
-  var totalBottles = bottlesPurchased;
-  var bottlesonHand = bottlesPurchased;
-  var capsonHand = bottlesPurchased;
-  var earnedCaps = 0;
-  var earnedBots = 0;
-  while (bottlesonHand > 1 || capsonHand > 3) {
-    if (bottlesonHand > 1) {
-      totalBottles += Math.floor(bottlesonHand / 2);
-      capsonHand += Math.floor(bottlesonHand / 2);
-      earnedBots += Math.floor(bottlesonHand / 2);
-      bottlesonHand = Math.floor(bottlesonHand / 2) + (bottlesonHand%2);
+  var bottlesPurchased = Math.floor(spend / 2)
+  var result = {
+    bottlesPurchased: bottlesPurchased, 
+   totalBottles: bottlesPurchased,
+   bottlesonHand: bottlesPurchased,
+   capsonHand: bottlesPurchased,
+   earnedCaps: 0,
+   earnedBots: 0
+  }
+
+  while (result.bottlesonHand > 1 || result.capsonHand > 3) {
+    if (result.bottlesonHand > 1) {
+      result.totalBottles += Math.floor(result.bottlesonHand / 2);
+      result.capsonHand += Math.floor(result.bottlesonHand / 2);
+      result.earnedBots += Math.floor(result.bottlesonHand / 2);
+      result.bottlesonHand = Math.floor(result.bottlesonHand / 2) + (result.bottlesonHand%2);
     }
-    if (capsonHand > 3) {
-      totalBottles += Math.floor(capsonHand / 4);
-      bottlesonHand += Math.floor(capsonHand / 4);
-      earnedCaps += Math.floor(capsonHand / 4);
-      capsonHand = Math.floor(capsonHand / 4) + (capsonHand%4);
+    if (result.capsonHand > 3) {
+      result.totalBottles += Math.floor(result.capsonHand / 4);
+      result.bottlesonHand += Math.floor(result.capsonHand / 4);
+      result.earnedCaps += Math.floor(result.capsonHand / 4);
+      result.capsonHand = Math.floor(result.capsonHand / 4) + (result.capsonHand%4);
     }    
   }
-  console.log(`TOTAL BOTTLES: ${totalBottles}`);
-  console.log(`REMAINING BOTTLES: ${bottlesonHand}`);
-  console.log(`REMAINING CAPS: ${capsonHand}`);
-  console.log('TOTAL EARNED: ');
-  console.log(` BOTTLES: ${earnedBots}`);
-  console.log(` CAPS: ${earnedCaps}`);
-
-
-
-  return;
+  return result;
 }
 
 function getInput() {
@@ -36,4 +31,10 @@ function getInput() {
   return input;
 }
 
-bottleCalculator(getInput());
+var calculated = bottleCalculator(getInput());
+console.log(`TOTAL BOTTLES: ${calculated.totalBottles}`);
+console.log(`REMAINING BOTTLES: ${calculated.bottlesonHand}`);
+console.log(`REMAINING CAPS: ${calculated.capsonHand}`);
+console.log('TOTAL EARNED: ');
+console.log(` BOTTLES: ${calculated.earnedBots}`);
+console.log(` CAPS: ${calculated.earnedCaps}`);
